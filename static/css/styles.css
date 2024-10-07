@@ -9,7 +9,7 @@ header {
     background-color: #000000;
     color: white;
     text-align: center;
-    padding: 15px 0;
+    padding: 12px 0;
 }
 
 footer {
@@ -22,19 +22,20 @@ footer {
     bottom: 0;
 }
 
-h1 {
+h1, h2 {
     margin: 0;
+    text-align: center;
 }
 
 table {
     width: 80%;
-    margin: 25px auto;
+    margin: 20px auto;
     border-collapse: collapse;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
-    padding: 15px;
+    padding: 12px;
     border: 1px solid #ddd;
     text-align: left;
 }
@@ -53,7 +54,7 @@ tr:hover {
 }
 
 img {
-    width: 85px;
+    width: 80px;
     height: auto;
     border-radius: 50%;
 }
