@@ -35,7 +35,7 @@ table {
 }
 
 th, td {
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
 }
@@ -55,6 +55,6 @@ tr:hover {
 
 img {
     width: 80px;
-    height: auto;
+    height: 90px;
     border-radius: 50%;
 }

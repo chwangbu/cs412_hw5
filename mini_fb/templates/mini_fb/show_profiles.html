@@ -1,5 +1,7 @@
 {% extends 'mini_fb/base.html' %} <!-- extender from base.html -->
 
+{% load static %}
+
 {% block content %}
 <h2>All Profiles</h2>
 <table>
@@ -14,7 +16,7 @@
         <td>{{ profile.first_name }}</td>
         <td>{{ profile.last_name }}</td>
         <td>{{ profile.city }}</td>
-        <td><img src="{{ profile.profile_image_url }}" alt="profile image" width="100"></td>
+        <td><img src="{% static 'images/' %}{{ profile.profile_image_url }}" alt="profile image" width="100"></td>
     </tr>
     {% endfor %}
 </table>
