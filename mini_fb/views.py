@@ -12,3 +12,4 @@ class ShowProfiles(ListView):
 class ShowProfilePageView(DetailView):
     model = Profile
     template_name = 'mini_fb/show_profile.html'
+    context_object_name = 'profile'
