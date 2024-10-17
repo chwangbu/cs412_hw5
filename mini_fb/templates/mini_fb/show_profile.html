@@ -8,5 +8,14 @@
 <p><strong>City:</strong> {{ profile.city }}</p>
 <p><strong>Email:</strong> {{ profile.email }}</p>
 
+<h3>Status Messages:</h3>
+<ul>
+    {% for status in profile.get_status_messages %}
+    <li><strong>{{ status.timestamp }}</strong>: {{ status.message }}</li>
+    {% empty %}
+    <p>No status messages found.</p>
+    {% endfor %}
+</ul>
+
 <a href="{% url 'show_all_profiles' %}">Back to All Profiles</a>
 {% endblock %}
