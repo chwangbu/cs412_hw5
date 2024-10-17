@@ -4,7 +4,7 @@ from django.views.generic import DetailView
 from django.urls import reverse
 from django.views.generic import CreateView
 from .forms import CreateProfileForm
-from .models import Profile
+from .models import Profile, StatusMessage
 from .forms import CreateStatusMessageForm
 from django.shortcuts import get_object_or_404
 
@@ -24,9 +24,17 @@ class CreateProfileView(CreateView):
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
 
+    def get_success_url(self):
+        return reverse('show_profile', kwargs={'pk': self.object.pk})
+    
+class CreateStatusMessageView(CreateView):
+    model = StatusMessage
+    form_class = CreateStatusMessageForm
+    template_name = 'mini_fb/create_status_form.html'
+
     def form_valid(self, form):
         form.instance.profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('show_profile', kwargs={'pk': self.object.pk})
+        return reverse('show_profile', kwargs={'pk': self.kwargs['pk']})
