@@ -4,11 +4,16 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     overflow-y: auto;
+    display: flex;
+    flex-direction: vertical;
+    min-height: 100vh;
 }
 
 main {
     min-height: calc(100vh - 100px);
-    padding-bottom: 20px;
+    padding-bottom: 100px;
+    flex-grow: 1;
+    padding-bottom: 100px;
 }
 
 header {
