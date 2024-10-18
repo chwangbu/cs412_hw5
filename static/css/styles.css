@@ -58,3 +58,21 @@ img {
     height: 90px;
     border-radius: 50%;
 }
+
+a.btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+a.btn:hover {
+    background-color: #218838;
+}
