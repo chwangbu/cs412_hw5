@@ -3,6 +3,12 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    overflow-y: auto;
+}
+
+main {
+    min-height: calc(100vh - 100px);
+    padding-bottom: 20px;
 }
 
 header {
@@ -20,6 +26,7 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+    z-index: 1000;
 }
 
 h1, h2 {
@@ -59,7 +66,7 @@ img {
     border-radius: 50%;
 }
 
-a.btn {
+a.btn, button.btn {
     display: inline-block;
     background-color: #28a745;
     color: white;
@@ -67,12 +74,19 @@ a.btn {
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
+    font-size: 16px;
     margin-bottom: 20px;
     font-size: 16px;
     transition: background-color 0.3s ease;
     margin-top: 20px;
+    border: none;
 }
 
 a.btn:hover {
     background-color: #218838;
+}
+
+a.btn, button.btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
