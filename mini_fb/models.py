@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from .models import StatusMessage
 
 # Create your models here.
 class Profile(models.Model):
@@ -24,7 +23,10 @@ class StatusMessage(models.Model):
     def __str__(self):
         return f"Message by {self.profile.first_name}: {self.message[:20]}..."
     
+    def get_images(self):
+        return self.images.all()
+    
 class Image(models.Model):
     image_file = models.ImageField(upload_to='images/')
-    status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE, related_names='images')
+    status_message = models.ForeignKey('StatusMessage', on_delete=models.CASCADE, related_name='images')
     uploaded_at = models.DateTimeField(auto_now_add=True)
