@@ -30,3 +30,19 @@ class Image(models.Model):
     image_file = models.ImageField(upload_to='images/')
     status_message = models.ForeignKey('StatusMessage', on_delete=models.CASCADE, related_name='images')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+class Friend(models.Model):
+    profile1 = models.ForeignKey(
+        'Profile',
+        related_name = 'friend_profile1',
+        on_delete = models.CASCADE
+    )
+    profile2 = models.ForeignKey(
+        'Profile',
+        related_name = 'friend_profile2',
+        on_delete = models.CASCADE
+    )
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.profile1} & {self.profile2}"
