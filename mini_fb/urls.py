@@ -7,6 +7,7 @@ from .views import CreateProfileView
 from .views import CreateStatusMessageView
 from .views import UpdateProfileView
 from .views import UpdateStatusMessageView, DeleteStatusMessageView
+from .views import CreateFriendView
 
 urlpatterns = [
     path('', ShowProfiles.as_view(), name='show_all_profiles'),
@@ -16,6 +17,7 @@ urlpatterns = [
     path('profile/<int:pk>/update', UpdateProfileView.as_view(), name='update_profile'),
     path('status/<int:pk>/update', UpdateStatusMessageView.as_view(), name='update_status'),
     path('status/<int:pk>/delete', DeleteStatusMessageView.as_view(), name='delete_status'),
+    path('profile/<int:pk>/add_friend/<int:other_pk>/', CreateFriendView.as_view(), name='add_friend'),
 ]
 
 if settings.DEBUG:
