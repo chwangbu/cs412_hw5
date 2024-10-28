@@ -9,6 +9,8 @@ from .forms import CreateStatusMessageForm
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import UpdateView, DeleteView
 from .forms import UpdateProfileForm
+from django.views import View
+from django.shortcuts import redirect
 
 # Create your views here.
 class ShowProfiles(ListView):
@@ -70,3 +72,10 @@ class DeleteStatusMessageView(DeleteView):
 
     def get_success_url(self):
         return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
+    
+class CreateFriendView(View):
+    def dispatch(self, request, *arg, **kwargs):
+        profile = Profile.objects.get(pk=kwargs['pk'])
+        other = Profile.objects.get(pk=kwargs['other_pk'])
+        profile.add_friend(other)
+        return redirect('show_profile', pk=profile.pk)
