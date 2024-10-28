@@ -41,6 +41,19 @@
     {% endfor %}
 </ul>
 
+<h3>Add New Friends:</h3>
+<ul>
+    {% for potential_friend in Profile.objects.exclude(pk=profile.pk).exclude(pk__in=profile.get_friends) %}
+    <li>
+        <a href="'{% url 'add_friend' profile.pk potential_friend.pk %}">
+            Add {{ potential_friend.first_name }} {{ potential_friend.last_name }}
+        </a>
+    </li>
+    {% empty %}
+    <p>No potential friends found.</p>
+    {% endfor %}
+</ul>
+
 <a href="{% url 'show_all_profiles' %}" class="btn">Back to All Profiles</a>
 <a href="{% url 'update_profile' profile.pk %}" class="btn">Update Profile</a>
 {% endblock %}
