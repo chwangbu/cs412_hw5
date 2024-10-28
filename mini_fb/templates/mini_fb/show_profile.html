@@ -30,6 +30,17 @@
     {% endfor %}
 </ul>
 
+<h3>Friends:</h3>
+<ul>
+    {% for friend in profile.get_friends %}
+    <li>
+        <a href="{% url 'show_profile' friend.pk %}">{{ friend.first_name }} {{ friend.last_name }}</a>
+    </li>
+    {% empty %}
+    <p>No Friends Found.</p>
+    {% endfor %}
+</ul>
+
 <a href="{% url 'show_all_profiles' %}" class="btn">Back to All Profiles</a>
 <a href="{% url 'update_profile' profile.pk %}" class="btn">Update Profile</a>
 {% endblock %}
