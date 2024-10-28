@@ -20,6 +20,16 @@ class Profile(models.Model):
         friends2 = Friend.object.filter(profile2=self).values_list('profile2', flat=True)
         return Profile.objects.filter(id__in=list(friends1)+list(friends2))
     
+    def add_friend(self, other):
+        if self == other:
+            return
+        
+        if not Friend.objects.filter(
+            models.Q(profile1=self, profile2=other) |
+            models.Q(profile2=self, profile2=self)
+        ).exists():
+            Friend.objects.create(profile1=self, profile2=other)
+            
 class StatusMessage(models.Model):
     message = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now)
