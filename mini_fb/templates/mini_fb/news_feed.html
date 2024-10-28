@@ -1,0 +1,24 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>{{ profile.first_name }}'s News Feed</h2>
+
+<ul> 
+    {% for status in profile.get_news_feed %}
+    <li> 
+        <strong>{{ status.timestamp }}</strong> - {{ status.profile.first_name }}: {{ status.message }}
+        <ul> 
+            {% for img in status.get_images %}
+            <li>
+                <img src="{{ img.image_file.url }}" alt="Image for {{ status.message }}" width="150">
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% empty %}
+    <p>No statis messages found in the news feed.</p>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'show_profile' profile.pk %}" class="btn">Back to Profile</a>
+{% endblock %}
