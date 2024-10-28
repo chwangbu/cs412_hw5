@@ -15,6 +15,11 @@ class Profile(models.Model):
     def get_status_messages(self):
         return self.statusmessage_set.all().order_by('-timestamp')
     
+    def get_friends(self):
+        friends1 = Friend.object.filter(profile1=self).values_list('profile1', flat=True)
+        friends2 = Friend.object.filter(profile2=self).values_list('profile2', flat=True)
+        return Profile.objects.filter(id__in=list(friends1)+list(friends2))
+    
 class StatusMessage(models.Model):
     message = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now)
@@ -46,3 +51,4 @@ class Friend(models.Model):
 
     def __str__(self):
         return f"{self.profile1} & {self.profile2}"
+    
