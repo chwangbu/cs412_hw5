@@ -30,6 +30,11 @@ class Profile(models.Model):
         ).exists():
             Friend.objects.create(profile1=self, profile2=other)
 
+    def get_friend_suggestion(self):
+        current_friends = list(self.get_friends().values_list('id', flat=True))
+        current_friends.append(self.id)
+        return Profile.objects.exclude(id__in=current_friends)
+
     def get_news_feed(self):
         friends = self.get_friends()
         return self.statusmessage_set.filter(models.Q(profile=self) | models.Q(profile__in=friends)).order_by('-timestamp')
