@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from .models import StatusMessage
 
 # Create your models here.
 class Profile(models.Model):
@@ -27,13 +26,13 @@ class Profile(models.Model):
         
         if not Friend.objects.filter(
             models.Q(profile1=self, profile2=other) |
-            models.Q(profile2=self, profile2=self)
+            models.Q(profile2=self, profile1=self)
         ).exists():
             Friend.objects.create(profile1=self, profile2=other)
 
     def get_news_feed(self):
         friends = self.get_friends()
-        return StatusMessage.objects.filter(models.Q(profile=self) | models.Q(profile__in=friends).order_by('-timestamp'))
+        return self.statusmessage_set.filter(models.Q(profile=self) | models.Q(profile__in=friends)).order_by('-timestamp')
 
 class StatusMessage(models.Model):
     message = models.TextField()
