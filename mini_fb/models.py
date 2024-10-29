@@ -16,8 +16,8 @@ class Profile(models.Model):
         return self.statusmessage_set.all().order_by('-timestamp')
     
     def get_friends(self):
-        friends1 = Friend.object.filter(profile1=self).values_list('profile1', flat=True)
-        friends2 = Friend.object.filter(profile2=self).values_list('profile2', flat=True)
+        friends1 = Friend.objects.filter(profile1=self).values_list('profile2', flat=True)
+        friends2 = Friend.objects.filter(profile2=self).values_list('profile1', flat=True)
         return Profile.objects.filter(id__in=list(friends1)+list(friends2))
     
     def add_friend(self, other):
