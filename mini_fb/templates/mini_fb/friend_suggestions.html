@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h1>Friend Suggestions for {{ profile }}</h1>
+<ul>
+    {% for suggestion in friend_suggestions %}
+        <li>
+            <a href="{% url 'show_profile_page' suggestion.id %}">{{ suggestion }}</a>
+            - <a href="{% url 'add_friend' profile.id suggestion.id %}">Add Friend</a>
+        </li>
+    {% empty %}
+        <p>No friend suggestions available.</p>
+    {% endfor %}
+</ul>
+<a href="{% url 'show_profile_page' profile.id %}">Back to Profile</a>
+{% endblock %}
