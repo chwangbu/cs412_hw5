@@ -57,4 +57,5 @@
 <a href="{% url 'show_all_profiles' %}" class="btn">Back to All Profiles</a>
 <a href="{% url 'update_profile' profile.pk %}" class="btn">Update Profile</a>
 <a href="{% url 'news_feed' profile.pk %}" class="btn">View News Feed</a>
+<a href="{% url 'friend_suggestions' profile.id %}">View Friend Suggestions</a>
 {% endblock %}
