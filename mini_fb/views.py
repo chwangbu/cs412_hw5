@@ -84,8 +84,8 @@ class DeleteStatusMessageView(DeleteView):
     
 class CreateFriendView(View):
     def dispatch(self, request, *arg, **kwargs):
-        profile = Profile.objects.get(pk=kwargs['pk'])
-        other = Profile.objects.get(pk=kwargs['other_pk'])
+        profile = get_object_or_404(Profile, pk=kwargs['pk'])
+        other = get_object_or_404(Profile, pk=kwargs['other_pk'])
         profile.add_friend(other)
         return redirect('show_profile', pk=profile.pk)
     
@@ -93,3 +93,13 @@ class ShowNewsFeedView(DetailView):
     model = Profile
     template_name = 'mini_fb/news_feed.html'
     context_object_name = 'profile'
+
+class ShowFriendsSuggestionView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/friend_suggestion.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+        context['friend_suggestions'] = profile.get_friend_suggestions()
+        return context
