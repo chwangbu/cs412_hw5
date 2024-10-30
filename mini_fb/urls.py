@@ -9,6 +9,7 @@ from .views import UpdateProfileView
 from .views import UpdateStatusMessageView, DeleteStatusMessageView
 from .views import CreateFriendView
 from .views import ShowNewsFeedView
+from .views import ShowFriendsSuggestionView
 
 urlpatterns = [
     path('', ShowProfiles.as_view(), name='show_all_profiles'),
@@ -19,7 +20,8 @@ urlpatterns = [
     path('status/<int:pk>/update', UpdateStatusMessageView.as_view(), name='update_status'),
     path('status/<int:pk>/delete', DeleteStatusMessageView.as_view(), name='delete_status'),
     path('profile/<int:pk>/add_friend/<int:other_pk>/', CreateFriendView.as_view(), name='add_friend'),
-    path('profile/<int:pk>/news_feed', ShowNewsFeedView.as_view(), name='news_feed')
+    path('profile/<int:pk>/news_feed', ShowNewsFeedView.as_view(), name='news_feed'),
+    path('profiel/<int:pk>/friend_suggestions/', ShowFriendsSuggestionView.as_view(), name='friend_suggestion'),
 ]
 
 if settings.DEBUG:
