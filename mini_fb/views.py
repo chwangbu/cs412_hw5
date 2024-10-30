@@ -96,7 +96,7 @@ class ShowNewsFeedView(DetailView):
 
 class ShowFriendsSuggestionView(DetailView):
     model = Profile
-    template_name = 'mini_fb/friend_suggestion.html'
+    template_name = 'mini_fb/friend_suggestions.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
