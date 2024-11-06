@@ -15,9 +15,16 @@
 
     <nav>
         {% if user.is_authenticated %}
-            <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+            <p>
+                Welcome, {{ user.username }}! 
+                <a href="{% url 'show_profile' user.profile.pk %}">My Profile</a> | 
+                <a href="{% url 'logout' %}">Logout</a>
+            </p>
         {% else %}
-            <p><a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a></p>
+            <p>
+                <a href="{% url 'login' %}">Login</a> | 
+                <a href="{% url 'signup' %}">Sign Up</a>
+            </p>
         {% endif %}
     </nav>
 
