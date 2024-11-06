@@ -51,7 +51,7 @@
     <ul>
         {% for potential_friend in potential_friends %}
         <li>
-            <a href="'{% url 'add_friend' profile.pk potential_friend.pk %}">
+            <a href="{% url 'add_friend' profile.pk potential_friend.pk %}">
                 Add {{ potential_friend.first_name }} {{ potential_friend.last_name }}
             </a>
         </li>
