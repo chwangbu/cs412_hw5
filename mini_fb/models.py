@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model):
@@ -8,6 +9,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     profile_image_url = models.CharField(max_length=150)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -70,4 +72,3 @@ class Friend(models.Model):
 
     def __str__(self):
         return f"{self.profile1} & {self.profile2}"
-    
