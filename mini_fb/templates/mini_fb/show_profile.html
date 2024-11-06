@@ -8,15 +8,20 @@
 <p><strong>City:</strong> {{ profile.city }}</p>
 <p><strong>Email:</strong> {{ profile.email }}</p>
 
-<a href="{% url 'create_status' profile.pk %}" class="btn">Create New Status Message</a>
+{% if user.is_authenticated and user == profile.user %}
+    <!-- Show the button to create a new status message if the user is the profile owner -->
+    <a href="{% url 'create_status' profile.pk %}" class="btn">Create New Status Message</a>
+{% endif %}
 
 <h3>Status Messages:</h3>
 <ul>
     {% for status in profile.get_status_messages %}
     <li>
         <strong>{{ status.timestamp }}</strong>: {{ status.message }}
-        <a href="{% url 'update_status' status.pk %}" class="btn">Update</a>
-        <a href="{% url 'delete_status' status.pk %}" class="btn">Delete</a>
+        {% if user.is_authenticated and user == profile.user %}
+            <a href="{% url 'update_status' status.pk %}" class="btn">Update</a>
+            <a href="{% url 'delete_status' status.pk %}" class="btn">Delete</a>
+        {% endif %}
         <ul>
             {% for img in status.get_images %}
             <li>
@@ -41,21 +46,27 @@
     {% endfor %}
 </ul>
 
-<h3>Add New Friends:</h3>
-<ul>
-    {% for potential_friend in potential_friends %}
-    <li>
-        <a href="'{% url 'add_friend' profile.pk potential_friend.pk %}">
-            Add {{ potential_friend.first_name }} {{ potential_friend.last_name }}
-        </a>
-    </li>
-    {% empty %}
-    <p>No potential friends found.</p>
-    {% endfor %}
-</ul>
+{% if user.is_authenticated and user == profile.user %}
+    <h3>Add New Friends:</h3>
+    <ul>
+        {% for potential_friend in potential_friends %}
+        <li>
+            <a href="'{% url 'add_friend' profile.pk potential_friend.pk %}">
+                Add {{ potential_friend.first_name }} {{ potential_friend.last_name }}
+            </a>
+        </li>
+        {% empty %}
+        <p>No potential friends found.</p>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 <a href="{% url 'show_all_profiles' %}" class="btn">Back to All Profiles</a>
-<a href="{% url 'update_profile' profile.pk %}" class="btn">Update Profile</a>
-<a href="{% url 'news_feed' profile.pk %}" class="btn">View News Feed</a>
-<a href="{% url 'friend_suggestions' profile.id %}">View Friend Suggestions</a>
+
+{% if user.is_authenticated and user == profile.user %}
+    <a href="{% url 'update_profile' profile.pk %}" class="btn">Update Profile</a>
+    <a href="{% url 'news_feed' profile.pk %}" class="btn">View News Feed</a>
+    <a href="{% url 'friend_suggestions' profile.id %}">View Friend Suggestions</a>
+{% endif %}
+
 {% endblock %}

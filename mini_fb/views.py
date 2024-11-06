@@ -11,6 +11,7 @@ from django.views.generic.edit import UpdateView, DeleteView
 from .forms import UpdateProfileForm
 from django.views import View
 from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class ShowProfiles(ListView):
@@ -32,7 +33,7 @@ class ShowProfilePageView(DetailView):
 
         return context
         
-class CreateProfileView(CreateView):
+class CreateProfileView(LoginRequiredMixin, CreateView):
     model = Profile
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
@@ -59,7 +60,7 @@ class CreateStatusMessageView(CreateView):
     def get_success_url(self):
         return reverse('show_profile', kwargs={'pk': self.kwargs['pk']})
     
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_fb/update_profile_form.html'
@@ -75,7 +76,7 @@ class UpdateStatusMessageView(UpdateView):
     def get_success_url(self):
         return reverse('show_profile', kwargs={'pk': self.object.pk})
     
-class DeleteStatusMessageView(DeleteView):
+class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     model = StatusMessage
     template_name = 'mini_fb/delete_status_form.html'
 
