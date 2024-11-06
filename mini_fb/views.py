@@ -95,6 +95,9 @@ class ShowNewsFeedView(DetailView):
     template_name = 'mini_fb/news_feed.html'
     context_object_name = 'profile'
 
+    def get_object(self):
+        return get_object_or_404(Profile, user=self.request.user)
+
 class ShowFriendsSuggestionView(DetailView):
     model = Profile
     template_name = 'mini_fb/friend_suggestions.html'
@@ -104,3 +107,6 @@ class ShowFriendsSuggestionView(DetailView):
         profile = self.get_object()
         context['friend_suggestions'] = profile.get_friend_suggestions()
         return context
+    
+    def get_object(self):
+        return get_object_or_404(Profile, user=self.request.user)
