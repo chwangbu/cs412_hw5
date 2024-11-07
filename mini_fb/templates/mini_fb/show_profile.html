@@ -9,7 +9,6 @@
 <p><strong>Email:</strong> {{ profile.email }}</p>
 
 {% if user.is_authenticated and user == profile.user %}
-    <!-- Show the button to create a new status message if the user is the profile owner -->
     <a href="{% url 'create_status' %}" class="btn">Create New Status Message</a>
 {% endif %}
 
