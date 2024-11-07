@@ -20,7 +20,11 @@ header {
     background-color: #000000;
     color: white;
     text-align: center;
-    padding: 12px 0;
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
