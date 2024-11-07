@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>Post a Status Message</h2>
-<form method="POST" enctype="multipart/form-data"></form> 
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="file" name="files" multiple>
