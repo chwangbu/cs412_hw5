@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'mini_fb/base.html' %}
 
 {% load static %}
 
@@ -7,12 +7,12 @@
 <ul>
     {% for suggestion in friend_suggestions %}
         <li>
-            <a href="{% url 'show_profile_page' suggestion.id %}">{{ suggestion }}</a>
-            - <a href="{% url 'add_friend' profile.id suggestion.id %}">Add Friend</a>
+            <a href="{% url 'show_profile' suggestion.id %}">{{ suggestion }}</a>
+            - <a href="{% url 'add_friend' suggestion.id %}">Add Friend</a>
         </li>
     {% empty %}
         <p>No friend suggestions available.</p>
     {% endfor %}
 </ul>
-<a href="{% url 'show_profile_page' profile.id %}">Back to Profile</a>
+<a href="{% url 'show_profile' profile.id %}">Back to Profile</a>
 {% endblock %}

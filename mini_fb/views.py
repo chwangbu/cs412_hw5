@@ -102,7 +102,7 @@ class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     
 class CreateFriendView(View):
     def dispatch(self, request, *arg, **kwargs):
-        profile = get_object_or_404(Profile, pk=kwargs['pk'])
+        profile = request.user.profile
         other = get_object_or_404(Profile, pk=kwargs['other_pk'])
         profile.add_friend(other)
         return redirect('show_profile', pk=profile.pk)

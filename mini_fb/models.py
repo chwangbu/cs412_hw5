@@ -32,7 +32,7 @@ class Profile(models.Model):
         ).exists():
             Friend.objects.create(profile1=self, profile2=other)
 
-    def get_friend_suggestion(self):
+    def get_friend_suggestions(self):
         current_friends = list(self.get_friends().values_list('id', flat=True))
         current_friends.append(self.id)
         return Profile.objects.exclude(id__in=current_friends)
