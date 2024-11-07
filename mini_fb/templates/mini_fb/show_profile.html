@@ -9,7 +9,7 @@
 <p><strong>Email:</strong> {{ profile.email }}</p>
 
 {% if user.is_authenticated and user == profile.user %}
-    <a href="{% url 'create_status' %}" class="btn">Create New Status Message</a>
+    <a href="{% url 'create_status' profile.pk %}" class="btn">Create New Status Message</a>
 {% endif %}
 
 <h3>Status Messages:</h3>
